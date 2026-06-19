@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBT No. 4 Almoloya de Juárez - Proyecto Escolar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-vino: #840C24;    
+            --color-mostaza: #BDA15E; 
+            --color-blanco: #FFFFFF;
+            --color-fondo-claro: #f4f4f4;
+            --color-texto: #333333;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body { 
+            background-color: var(--color-fondo-claro); 
+            color: var(--color-texto); 
+            line-height: 1.6; 
+        }
+
+        /* --- BANDA SUPERIOR --- */
+        .top-bar {
+            background-color: var(--color-mostaza);
+            color: var(--color-vino);
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        header {
+            background-color: var(--color-vino);
+            padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 3px dashed var(--color-mostaza);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-container img { border-radius: 5px; }
+        .logo-container h1 { color: var(--color-mostaza); font-size: 1.5rem; text-transform: uppercase; }
+
+        nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--color-blanco); text-decoration: none; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--color-mostaza); }
+
+        /* --- SECCIÓN HERO --- */
+        .hero {
+            position: relative; height: 80vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: var(--color-blanco);
+            /* Degradado ajustado para oscurecer la imagen y mantener el tono vino institucional sin verse rosa */
+            background: linear-gradient(rgba(60, 5, 15, 0.85), rgba(100, 10, 25, 0.85)), 
+                        url('https://images.unsplash.com/photo-1523050853064-e86e3e9128ad?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; background-position: center;
+            border-bottom: 8px solid var(--color-mostaza);
+        }
+
+        .hero-content h2 { font-size: 3.5rem; color: var(--color-mostaza); margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        
+        .btn-descubrir {
+            display: inline-block; margin-top: 25px; padding: 15px 35px;
+            background-color: var(--color-mostaza); color: var(--color-vino);
+            text-decoration: none; font-weight: bold; font-size: 1.1rem;
+            border-radius: 50px; text-transform: uppercase; transition: 0.4s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn-descubrir:hover { background-color: var(--color-blanco); transform: scale(1.1); }
+
+        /* --- SECCIONES --- */
+        section { padding: 80px 10%; }
+        .titulo-seccion { text-align: center; color: var(--color-vino); font-size: 2.2rem; margin-bottom: 40px; }
+        .titulo-seccion::after { content: ''; display: block; width: 80px; height: 4px; background: var(--color-mostaza); margin: 10px auto; }
+
+        .info-detallada { background-color: var(--color-blanco); border-radius: 15px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; margin: 40px 10%; padding: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
+        .info-texto { flex: 1; min-width: 300px; }
+        .info-texto h3 { color: var(--color-vino); margin-bottom: 15px; font-size: 1.8rem; }
+        .info-imagen { flex: 1; min-width: 300px; }
+        .info-imagen img { width: 100%; border-radius: 10px; border-left: 10px solid var(--color-mostaza); }
+
+        /* --- ESPECIALIDADES --- */
+        .grid-especialidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .tarjeta { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+        .tarjeta img { width: 100%; height: 200px; object-fit: cover; }
+        .tarjeta-info { padding: 25px; }
+
+        /* --- EVENTOS (FOTOS Y VIDEOS) --- */
+        .eventos-container { background-color: var(--color-vino); color: white; }
+        .eventos-container .titulo-seccion { color: var(--color-mostaza); margin-bottom: 50px;}
+        
+        .galeria-eventos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .foto-evento { position: relative; height: 250px; border: 2px solid var(--color-mostaza); overflow: hidden; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+        .foto-evento img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s;}
+        .foto-evento:hover img { transform: scale(1.1); }
+        .pie-foto { position: absolute; bottom: 0; background: rgba(189, 161, 94, 0.9); color: var(--color-vino); width: 100%; padding: 10px; text-align: center; font-weight: bold; }
+
+        .titulo-secundario { text-align: center; color: var(--color-blanco); font-size: 1.8rem; margin: 60px 0 30px 0; border-bottom: 2px dashed var(--color-mostaza); padding-bottom: 10px;}
+        
+        .galeria-videos { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .video-contenedor { width: 100%; max-width: 450px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; border: 2px solid var(--color-mostaza); box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+        .video-contenedor video { width: 100%; border-radius: 8px; outline: none; }
+        .video-titulo { text-align: center; color: var(--color-mostaza); margin-top: 10px; font-weight: bold; font-size: 1rem;}
+
+        /* --- DATOS INSTITUCIONALES --- */
+        .datos-escuela { background-color: var(--color-blanco); text-align: center; }
+        .contenedor-datos { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
+        .dato-card { background: #f9f9f9; padding: 25px; border-radius: 15px; border-bottom: 5px solid var(--color-mostaza); min-width: 250px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .dato-card h4 { color: var(--color-vino); margin-bottom: 10px; text-transform: uppercase; font-size: 1.1rem; }
+        
+        .btn-datos { display: inline-block; background-color: var(--color-vino); color: var(--color-mostaza); padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 15px; transition: 0.3s; }
+        .btn-datos:hover { background-color: var(--color-mostaza); color: var(--color-vino); }
+
+        /* --- REDES SOCIALES --- */
+        .redes-sociales { text-align: center; background: #eee; }
+        .contenedor-iconos { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
+        .icono-red { text-decoration: none; color: var(--color-vino); transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
+        .icono-red i { font-size: 2.5rem; margin-bottom: 5px;}
+        .icono-red:hover { color: var(--color-mostaza); transform: translateY(-5px); }
+
+        /* --- FOOTER --- */
+        footer { background: #222; color: white; text-align: center; padding: 40px; border-top: 5px solid var(--color-mostaza); }
+        
+        .reproductor-audio { margin-top: 20px; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">10 Años de experiencia que nos respaldan</div>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.Nc5kb0xDGJq8QeVh-5HjtAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" width="60" alt="Logo CBT">
+            <h1>CBT No.4, Almoloya de Juárez</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#conocenos">Conócenos</a></li>
+                <li><a href="#especialidades">Carreras</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#redes">Redes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>Excelencia Técnica</h2>
+            <p>Formación integral en Santa Catarina Tabernillas.</p>
+            <a href="#conocenos" class="btn-descubrir">Descubre nuestra oferta <i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <div id="conocenos" class="info-detallada">
+        <div class="info-texto">
+            <h2 class="titulo-seccion" style="text-align: left; margin-left: 0;">¿Por qué elegir el CBT?</h2>
+            <p>El <strong>CBT No. 4 Almoloya de Juárez</strong> ofrece un modelo de Bachillerato Tecnológico Bivalente. Esto significa que al terminar tus estudios, no solo obtienes tu certificado de preparatoria para ir a la universidad, sino también un <strong>Título y Cédula Profesional</strong>.</p>
+            <br>
+            <p>Contamos con instalaciones adecuadas para tus prácticas, docentes capacitados y un ambiente de sana convivencia que impulsa el desarrollo de tus habilidades técnicas y humanas.</p>
+        </div>
+        <div class="info-imagen">
+            <img src="C:\Users\mbell\Desktop\CBT No.4\WhatsApp Image 2026-05-29 at 12.54.43 PM (2).jpeg" alt="Educación Superior">
+        </div>
+    </div>
+
+    <section id="especialidades">
+        <h2 class="titulo-seccion">Especialidades Técnicas</h2>
+        <div class="grid-especialidades">
+            <article class="tarjeta">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.2y0O9yJtAqBxz2-baafW1AHaEe?rs=1&pid=ImgDetMain" alt="Diseño">
+                <div class="tarjeta-info">
+                    <h3>Diseño Asistido por Computadora</h3>
+                    <p>Especialízate en la creación de planos y modelado 3D profesional.</p>
+                </div>
+            </article>
+            <article class="tarjeta">
+                <img src="C:\Users\mbell\Desktop\CBT No.4\WhatsApp Image 2026-06-05 at 12.14.47 PM.jpeg" alt="Formación">
+                <div class="tarjeta-info">
+                    <h3>Formación Integral</h3>
+                    <p>Educación de calidad que te permite trabajar y estudiar la universidad al mismo tiempo.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div id="eventos" class="eventos-container">
+        <section>
+            <h2 class="titulo-seccion">Mi escuela,Tu escuela</h2>
+            <div class="galeria-eventos">
+                
+                <div class="foto-evento">
+                    <img src="C:\Users\mbell\Desktop\CBT No.4\WhatsApp Image 2026-05-29 at 12.54.43 PM (6).jpeg" alt="Conoce nuestra escuela">
+                    <div class="pie-foto">Conoce nuestra escuela</div>
+                </div>
+
+                <div class="foto-evento">
+                    <img src="" alt="Evento Graduación">
+                    <div class="pie-foto">Graduaciones</div>
+                </div>
+
+                <div class="foto-evento">
+                    <img src="C:\Users\mbell\Desktop\CBT No.4\WhatsApp Image 2026-05-29 at 12.54.43 PM (5).jpeg" alt="Actividades académicas">
+                    <div class="pie-foto">Amplias instalaciones</div>
+                </div>
+
+                <div class="foto-evento">
+                    <img src="C:\Users\mbell\Desktop\CBT No.4\WhatsApp Image 2026-05-29 at 12.54.43 PM (4).jpeg" alt="Amplias instalaciones">
+                    <div class="pie-foto">Amplias instalacions</div>
+                </div>
+
+                <div class="foto-evento">
+                    <img src="C:\Users\mbell\Desktop\CBT No.4\WhatsApp Image 2026-05-29 at 12.54.43 PM (3).jpeg" alt="Actividades académicas">
+                    <div class="pie-foto">Actividades académicas</div>
+                </div>
+
+                <div class="foto-evento">
+                    <img src="C:\Users\mbell\Desktop\CBT No.4\WhatsApp Image 2026-05-29 at 12.54.43 PM (1).jpeg" alt="Entorno Profesional">
+                    <div class="pie-foto">Entorno Profesional</div>
+                </div>
+
+            </div>
+
+            <h3 class="titulo-secundario">Videos de la Institución</h3>
+            <div class="galeria-videos">
+                
+                <div class="video-contenedor">
+                    <video controls>
+                        <source src="C:\Users\mbell\Videos\Captures\0605(1).mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                    <div class="video-titulo">Conoce nuestras instalaciones</div>
+                </div>
+
+                <div class="video-contenedor">
+                    <video controls>
+                        <source src="C:\Users\mbell\Videos\Captures\0605.mp4" type="video/mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                    <div class="video-titulo">Testimonios de alumnos</div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+    <section class="datos-escuela">
+        <h2 class="titulo-seccion">Información Institucional</h2>
+        <div class="contenedor-datos">
+            <div class="dato-card">
+                <h4>Ubicación</h4>
+                <p>Santa Catarina Tabernillas, Almoloya de Juárez.</p>
+                <a href="https://www.google.com/maps?q=CBT+No+4+Almoloya+de+Juarez" target="_blank" class="btn-datos">
+                    <i class="fas fa-map-marker-alt"></i> Mapa
+                </a>
+            </div>
+
+            <div class="dato-card">
+                <h4>Detalles del Plantel</h4>
+                <p><strong>Turno:</strong> Discontinuo</p>
+                <p><strong>Zona:</strong> Rural</p>
+            </div>
+
+            <div class="dato-card">
+                <h4>Nuestra Oferta</h4>
+                <p>Consulta los detalles del servicio.</p>
+                <a href="https://seduc.edomex.gob.mx/" target="_blank" class="btn-datos">
+                    <i class="fas fa-graduation-cap"></i> Portal Educativo
+                </a>
+            </div>
+             <div class="dato-card">
+                <h4>Mi Bachillerato</h4>
+                <p>Detalles oficiales de la institución.</p>
+                <a href="https://escuelasmex.com/educacion-media-superior/bachillerato-tecnologico/estado-de-mexico/almoloya-de-juarez/san-agustin-tabernillas" target="_blank" class="btn-datos">
+                    <i class="fas fa-book"></i> Ver Perfil
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="redes" class="redes-sociales">
+        <h2 class="titulo-seccion">Conéctate</h2>
+        <div class="contenedor-iconos">
+            <a href="mailto:cbt4almoloya@gmail.com" class="icono-red"><i class="fas fa-envelope"></i><span>Correo</span></a>
+            <a href="https://www.facebook.com/share/1AvKWFr84K/" target="_blank" class="icono-red"><i class="fab fa-facebook"></i><span>Facebook</span></a>
+            <a href="https://www.instagram.com/cbt4tabernillas?igsh=M2Fjamxwc3lyejc1" target="_blank" class="icono-red"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+            <a href="https://www.tiktok.com/@cbt4tabernillas" target="_blank" class="icono-red"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>CBT No. 4 ALMOLOYA DE JUÁREZ</strong></p>
+        <p>Santa Catarina Tabernillas, Estado de México.</p>
+        
+        <div class="reproductor-audio">
+            <p style="font-size: 0.8rem; margin-bottom: 5px;">Música Relajante de Fondo</p>
+            <audio controls autoplay loop>
+                <source src="C:\Users\mbell\Downloads\suno-87e46dff-1508-43a4-9a49-7edc8e93445e.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+
+        <p style="font-size: 0.8rem; color: #888; margin-top: 20px;">© 2026 - Orgullosamente Educando</p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Página creada para proyecto escolar por <strong>Miguel Alexander Bellido Arias y Elvis Alvarez Caiano</strong></p>
+    </footer>
+
+</body>
+</html>
